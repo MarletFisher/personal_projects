@@ -1,0 +1,64 @@
+<h4>Reader Page</h4>
+<!-- <p>This is the page they will read the chapter</p> -->
+
+<nav id="navbar-pagejump">
+  <ul class="pagination">
+    <li class="page-item">
+      <a
+        class="page-link"
+        [ngClass]="{ disabled: currentPage === 0 }"
+        (click)="currentPage = currentPage - 1"
+        >Prev</a
+      >
+    </li>
+    <ng-container *ngFor="let page of displayChapter.pages; let i = index">
+      <li
+        class="page-item"
+        [ngClass]="{ active: i === currentPage }"
+        *ngIf="checkIndex(i)"
+      >
+        <!-- (click)="currentPage = i" -->
+        <a
+          href="/reader/{{ displayChapter.chapterNumber }}/#scrollspyHeading{{
+            i
+          }}"
+          class="page-link"
+          >{{ i + 1 }}</a
+        >
+      </li>
+    </ng-container>
+    <li class="page-item">
+      <a
+        class="page-link"
+        [ngClass]="{
+          disabled: currentPage === displayChapter.pages.length - 1
+        }"
+        (click)="currentPage = currentPage + 1"
+        >Next</a
+      >
+    </li>
+  </ul>
+</nav>
+
+<div class="main-container">
+  <div
+    data-bs-spy="scroll"
+    data-bs-target="#navbar-pagejump"
+    data-bs-offset="0"
+    tabindex="0"
+    class="chapter-container"
+  >
+    <!-- <h4>{{ images[currentPage].title }}</h4> -->
+
+    <!-- <img [src]="images[currentPage].src" /> -->
+
+    <ng-container *ngFor="let page of displayChapter.pages; let i = index">
+      <img
+        [src]="page.src"
+        id="scrollspyHeading{{ i }}"
+        class="page-container"
+      />
+    </ng-container>
+    <img />
+  </div>
+</div>

@@ -1,0 +1,32 @@
+<h4>Chapters List</h4>
+<p>Choose chapter here</p>
+
+<!-- <table class="table">
+  <thead>
+    <tr>
+      <td scope="col">#</td>
+      <td scope="col">Title</td>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let chapter of chapters">
+      <td scope="col">
+        {{ chapter.chapter }}
+      </td>
+      <td scope="col">
+        <a routerLink="/reader/chapter-{{ chapter.chapter }}">{{
+          chapter.title
+        }}</a>
+      </td>
+    </tr>
+  </tbody>
+</table> -->
+
+<ul>
+  <li *ngFor="let chapter of chapters">
+    <!-- <a routerLink="/reader/{{ chapter.chapterNumber }}"> -->
+    <a routerLink="/reader/{{ chapter.chapterNumber }}">
+      Chapter {{ chapter.chapterNumber }} - {{ chapter.title }}</a
+    >
+  </li>
+</ul>

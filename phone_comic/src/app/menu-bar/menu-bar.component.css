@@ -1,0 +1,11 @@
+.menu-container {
+  width: 100%;
+  height: 12rem;
+  background-color: #191a1c;
+  /* #ffb3a0 */
+  border-bottom: 2px solid grey;
+}
+/* #3f4c30 */
+.menuTitle {
+  color: white;
+}
