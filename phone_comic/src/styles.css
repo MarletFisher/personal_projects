@@ -1,11 +1,21 @@
 /* You can add global styles to this file, and also import other style files */
 
-@import "bootstrap/dist/css/bootstrap.css";
+/* @import "bootstrap/dist/css/bootstrap.css"; */
+
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,200;9..40,400&family=Montserrat:wght@200&display=swap");
+
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,200;9..40,400;9..40,600&family=Montserrat:wght@200&display=swap");
 
 body {
   margin: 0px;
   position: relative;
 }
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}

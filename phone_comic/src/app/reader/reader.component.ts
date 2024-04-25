@@ -58,8 +58,6 @@ export class ReaderComponent implements OnInit {
     // this adds a class to the active scrolled page
   }
 
-  selectedOption = '';
-
   // getChapter() {
   //   const num = Number(this.route.snapshot.paramMap.get('chapterNumber'));
   //   this.chapterService.getChapterById(num).subscribe((chapter: Chapter) => {

@@ -14,6 +14,9 @@ import { ReaderComponent } from './reader/reader.component';
 
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
+import { StoreModule } from '@ngrx/store';
+import { metaReducers, reducers } from './ngrx/reducers';
+import { TableRowHighlightDirective } from './table-row-highlight.directive';
 
 const appRoutes: Routes = [
   { path: 'home-page', component: HomePageComponent },
@@ -30,6 +33,7 @@ const appRoutes: Routes = [
     HomePageComponent,
     ChaptersListComponent,
     PageNotFoundComponent,
+    TableRowHighlightDirective,
   ],
   imports: [
     BrowserModule,
@@ -39,6 +43,9 @@ const appRoutes: Routes = [
     HttpClientModule,
     MatInputModule,
     MatSelectModule,
+    StoreModule.forRoot(reducers, {
+      metaReducers,
+    }),
   ],
   providers: [],
   bootstrap: [AppComponent],

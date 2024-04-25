@@ -4,6 +4,7 @@ export const CHAPTERS: Chapter[] = [
   {
     chapterNumber: 15,
     title: 'Green Day and Oasis - Part 5',
+    dateRelease: 'October 2, 1998',
     pages: [
       {
         title: 'jjba-p5-ch15-p40a',
@@ -46,6 +47,7 @@ export const CHAPTERS: Chapter[] = [
   {
     chapterNumber: 16,
     title: 'The Requiem Plays Quietly',
+    dateRelease: 'March 4, 1999',
     pages: [
       {
         title: 'page-65',

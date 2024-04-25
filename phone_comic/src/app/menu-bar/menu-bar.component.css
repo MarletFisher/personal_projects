@@ -1,11 +1,38 @@
 .menu-container {
-  width: 100%;
+  max-width: 100%;
   height: 12rem;
   background-color: #191a1c;
+  padding: 0% 10%;
   /* #ffb3a0 */
   border-bottom: 2px solid grey;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .menu-title {
+    color: white;
+    h3 {
+      padding: 0px;
+    }
+  }
+
+  .menu-links {
+    display: flex;
+    .menu-item {
+      /* border: 1px solid grey; */
+      border-radius: 5px;
+      width: 6em;
+      height: 1em;
+      padding: 1em;
+      text-align: center;
+      margin-left: 1em;
+      text-decoration: none;
+      color: white;
+
+      &:hover {
+        background-color: #2e2e2e;
+      }
+    }
+  }
 }
 /* #3f4c30 */
-.menuTitle {
-  color: white;
-}

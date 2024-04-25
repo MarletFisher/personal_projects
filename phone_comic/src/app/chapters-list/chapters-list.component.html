@@ -1,10 +1,31 @@
 <h4>Chapters List</h4>
+<table cellspacing="0">
+  <thead>
+    <tr>
+      <th class="chapterNum">Chapter</th>
+      <th class="chapterTitle">Title</th>
+      <th class="chapterReleaseDate">Released</th>
+    </tr>
+  </thead>
+  <tbody>
+    <ng-container *ngFor="let chapter of chapters">
+      <tr routerLink="/reader/{{ chapter.chapterNumber }}">
+        <td class="chapterNum">{{ chapter.chapterNumber }}</td>
+        <a
+          ><td class="chapterTitle">{{ chapter.title }}</td></a
+        >
+        <td class="chapterReleaseDate">{{ chapter.dateRelease }}</td>
+      </tr>
+    </ng-container>
+  </tbody>
+</table>
 
+<!-- <h4>Chapters List</h4>
 <ul>
   <li *ngFor="let chapter of chapters">
-    <!-- <a routerLink="/reader/{{ chapter.chapterNumber }}"> -->
+    <a routerLink="/reader/{{ chapter.chapterNumber }}">
     <a routerLink="/reader/{{ chapter.chapterNumber }}">
       Chapter {{ chapter.chapterNumber }} - {{ chapter.title }}</a
     >
   </li>
-</ul>
+</ul> -->

@@ -1,7 +1,8 @@
-import { Page } from "./page";
+import { Page } from './page';
 
 export interface Chapter {
-	chapterNumber: number;
-	title: string;
-	pages: Page[];
+  chapterNumber: number;
+  title: string;
+  dateRelease: string;
+  pages: Page[];
 }
