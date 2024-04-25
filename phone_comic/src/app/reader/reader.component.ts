@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { fromEvent, throttleTime } from 'rxjs';
 import { Chapter } from 'src/app/chapter';
 import { ChapterService } from '../chapter.service';
+
 // import { chaptersList } from 'src/assets/chapters';
 
 @Component({
@@ -16,7 +18,11 @@ export class ReaderComponent implements OnInit {
   constructor(
     private chapterService: ChapterService,
     private route: ActivatedRoute
-  ) {}
+  ) {
+    fromEvent(window, 'scroll')
+      .pipe(throttleTime(100))
+      .subscribe((event) => this.onWindowScroll(event));
+  }
 
   ngOnInit(): void {
     const chapterNum = Number(
@@ -26,22 +32,41 @@ export class ReaderComponent implements OnInit {
     this.initObservable(chapterNum);
   }
 
-  /*getChapters(): void {
-    const chapterNum = String(
-      this.route.snapshot.paramMap.get('chapterNumber')
-    );
-    this.chapterService
-      .getChapters()
-      .subscribe((chapters) => (this.chapters = chapters));
-  }*/
+  // @HostListener('window:scroll', ['$event'])
+  onWindowScroll(event: Event) {
+    console.log('scrolling');
+    // Logic to handle the scroll events will go here
+    // console.log('onWindowScroll() called. Event: ', event);
+    const scrollPosition = window.scrollY || document.documentElement.scrollTop;
+    const sections: any = document.querySelectorAll('.mangaPage');
 
-  getChapter() {
-    const num = Number(this.route.snapshot.paramMap.get('chapterNumber'));
-    this.chapterService.getChapterById(num).subscribe((chapter: Chapter) => {
-      console.log('In subscribe, data:', chapter);
-      this.displayChapter = chapter;
+    sections.forEach((section: HTMLElement) => {
+      if (
+        section.offsetTop <= scrollPosition &&
+        section.offsetTop + section.offsetHeight > scrollPosition
+      ) {
+        let navLinks: any = document.querySelectorAll('.navbar a');
+        navLinks.forEach((link: HTMLAnchorElement) => {
+          if (link.href.includes(section.id)) {
+            link.classList.add('active');
+          } else {
+            link.classList.remove('active');
+          }
+        });
+      }
     });
+    // this adds a class to the active scrolled page
   }
+
+  selectedOption = '';
+
+  // getChapter() {
+  //   const num = Number(this.route.snapshot.paramMap.get('chapterNumber'));
+  //   this.chapterService.getChapterById(num).subscribe((chapter: Chapter) => {
+  //     console.log('In subscribe, data:', chapter);
+  //     this.displayChapter = chapter;
+  //   });
+  // }
 
   initObservable(id: number) {
     this.chapterService.getChapterObsById(id).subscribe((chapter) => {
@@ -50,60 +75,6 @@ export class ReaderComponent implements OnInit {
       }
     });
   }
-
-  // images = [
-  //   {
-  //     title: 'jjba-p5-ch15-p40a',
-  //     src: './assets/chapter15/40.jpg',
-  //   },
-  //   {
-  //     title: 'jjba-p5-ch15-p40b',
-  //     src: './assets/chapter15/40_1.jpg',
-  //   },
-  //   {
-  //     title: 'jjba-p5-ch15-p41a',
-  //     src: './assets/chapter15/41.jpg',
-  //   },
-  //   {
-  //     title: 'jjba-p5-ch15-p41b',
-  //     src: './assets/chapter15/41_1.jpg',
-  //   },
-  //   {
-  //     title: 'jjba-p5-ch15-p42',
-  //     src: './assets/chapter15/42.jpg',
-  //   },
-  //   {
-  //     title: 'jjba-p5-ch15-p43',
-  //     src: './assets/chapter15/43.jpg',
-  //   },
-  //   {
-  //     title: 'jjba-p5-ch15-p44',
-  //     src: './assets/chapter15/44.jpg',
-  //   },
-  //   {
-  //     title: 'jjba-p5-ch15-p45a',
-  //     src: './assets/chapter15/45.jpg',
-  //   },
-  //   {
-  //     title: 'jjba-p5-ch15-p45b',
-  //     src: './assets/chapter15/45_1.jpg',
-  //   },
-  // ];
-
-  // getClass() {
-  //   // series of checks to return different classes
-  //   const classes = [];
-
-  //   if (something()) {
-  //     return classes.push('active');
-  //   }
-  //   if (somethingElse()) {
-  //     return classes.push('loading');
-  //   }
-  //   if (somethingOther()) {
-  //     return classes.push('inactive');
-  //   }
-  // }
 
   checkIndex(index: number) {
     return Math.abs(this.currentPage - index) < 10;

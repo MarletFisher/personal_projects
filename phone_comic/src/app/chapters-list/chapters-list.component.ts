@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 // import { CHAPTERS } from 'src/app/mock-chapters';
 import { Chapter } from '../chapter';
 import { ChapterService } from '../chapter.service';
-import { ChapterResponse } from '../chapterResponse';
+import { ChapterResponse } from '../chapterresponse';
 
 @Component({
   selector: 'app-chapters-list',

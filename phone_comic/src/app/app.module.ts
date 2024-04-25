@@ -6,11 +6,14 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ChaptersListComponent } from './chapters-list/chapters-list.component';
-import { ChaptersRoutingModule } from './chapters-list/chapters-routing.module';
+// import { ChaptersRoutingModule } from './chapters-list/chapters-routing.module';
 import { HomePageComponent } from './home-page/home-page.component';
 import { MenuBarComponent } from './menu-bar/menu-bar.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { ReaderComponent } from './reader/reader.component';
+
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
 
 const appRoutes: Routes = [
   { path: 'home-page', component: HomePageComponent },
@@ -32,8 +35,10 @@ const appRoutes: Routes = [
     BrowserModule,
     RouterModule.forRoot(appRoutes, { enableTracing: true }),
     AppRoutingModule,
-    ChaptersRoutingModule,
+    // ChaptersRoutingModule,
     HttpClientModule,
+    MatInputModule,
+    MatSelectModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

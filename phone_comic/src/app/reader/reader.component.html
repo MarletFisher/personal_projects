@@ -1,44 +1,62 @@
 <h4>Reader Page</h4>
 <!-- <p>This is the page they will read the chapter</p> -->
 
-<nav id="navbar-pagejump">
-  <ul class="pagination">
-    <li class="page-item">
-      <a
-        class="page-link"
-        [ngClass]="{ disabled: currentPage === 0 }"
-        (click)="currentPage = currentPage - 1"
-        >Prev</a
-      >
-    </li>
-    <ng-container *ngFor="let page of displayChapter.pages; let i = index">
-      <li
-        class="page-item"
-        [ngClass]="{ active: i === currentPage }"
-        *ngIf="checkIndex(i)"
-      >
-        <!-- (click)="currentPage = i" -->
-        <a
-          href="/reader/{{ displayChapter.chapterNumber }}/#scrollspyHeading{{
-            i
-          }}"
-          class="page-link"
-          >{{ i + 1 }}</a
+<!-- <li class="page-item">
+  <a
+    class="page-link"
+    [ngClass]="{ disabled: currentPage === 0 }"
+    (click)="currentPage = currentPage - 1"
+    >Prev</a
+  >
+</li>
+<ng-container *ngFor="let page of displayChapter.pages; let i = index">
+  <li
+    class="page-item"
+    [ngClass]="{ active: i === currentPage }"
+    *ngIf="checkIndex(i)"
+  >
+    (click)="currentPage = i"
+    <a
+      href="/reader/{{ displayChapter.chapterNumber }}/#scrollspyHeading{{
+        i
+      }}"
+      class="page-link"
+      >{{ i + 1 }}</a
+    >
+  </li>
+</ng-container>
+<li class="page-item">
+  <a
+    class="page-link"
+    [ngClass]="{
+      disabled: currentPage === displayChapter.pages.length - 1
+    }"
+    (click)="currentPage = currentPage + 1"
+    >Next</a
+  >
+</li> -->
+
+<!-- <mat-form-field>
+  <mat-label>Jump to Page #</mat-label>
+  <select>
+    <option *ngFor="let page of displayChapter.pages; let i = index">
+      {{ i + 1 }}
+    </option>
+  </select>
+</mat-form-field> -->
+
+<button id="pageJumpBtn">
+  Jump to Page #
+  <div id="pageJumpDropdown">
+    <ul class="navbar">
+      <li *ngFor="let page of displayChapter.pages; let i = index">
+        <a href="/reader/{{ displayChapter.chapterNumber }}/#page{{ i + 1 }}"
+          >Page {{ i + 1 }}</a
         >
       </li>
-    </ng-container>
-    <li class="page-item">
-      <a
-        class="page-link"
-        [ngClass]="{
-          disabled: currentPage === displayChapter.pages.length - 1
-        }"
-        (click)="currentPage = currentPage + 1"
-        >Next</a
-      >
-    </li>
-  </ul>
-</nav>
+    </ul>
+  </div>
+</button>
 
 <div class="main-container">
   <div
@@ -55,8 +73,8 @@
     <ng-container *ngFor="let page of displayChapter.pages; let i = index">
       <img
         [src]="page.src"
-        id="scrollspyHeading{{ i }}"
-        class="page-container"
+        id="page{{ i + 1 }}"
+        class="page-container mangaPage"
       />
     </ng-container>
     <img />
