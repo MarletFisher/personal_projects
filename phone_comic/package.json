@@ -7,7 +7,8 @@
     "server": "ts-node-dev --respawn --transpile-only ./server/server.ts",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "testdbc": "ts-node-dev --respawn --transpile-only ./server/src/dbConnection.ts"
   },
   "private": true,
   "dependencies": {
@@ -21,10 +22,13 @@
     "@angular/platform-browser": "^15.1.0",
     "@angular/platform-browser-dynamic": "^15.1.0",
     "@angular/router": "^15.1.0",
+    "@auth0/angular-jwt": "^5.2.0",
     "@ngrx/store": "^15.4.0",
+    "bcrypt": "^5.1.1",
     "bootstrap": "^5.3.3",
     "cors": "^2.8.5",
     "express": "^4.19.2",
+    "mssql": "^10.0.2",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.12.0"

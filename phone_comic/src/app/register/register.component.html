@@ -1,0 +1,64 @@
+<h4>Register User</h4>
+
+<div class="form-container">
+  <form id="registerForm" [formGroup]="registerForm">
+    <div class="form-page">
+      <div class="form-section form-section-L">
+        <label for="username">Username: </label>
+        <input
+          formControlName="username"
+          type="text"
+          name="username"
+          placeholder="Username"
+          class="regform-input"
+        />
+      </div>
+
+      <div class="form-section form-section-L">
+        <label for="password">Password: </label>
+        <input
+          formControlName="password"
+          type="password"
+          name="password"
+          class="regform-input"
+        />
+      </div>
+
+      <div class="form-section">
+        <label for="email">Email: </label>
+        <input
+          formControlName="email"
+          type="email"
+          placeholder="example@gmail.com"
+          name="email"
+          class="regform-input"
+        />
+      </div>
+
+      <div class="form-section">
+        <label for="email">First Name: </label>
+        <input
+          formControlName="firstname"
+          type="text"
+          placeholder="John"
+          name="firstname"
+          class="regform-input name-input"
+        />
+        <label for="email">Last Name: </label>
+        <input
+          formControlName="lastname"
+          type="text"
+          placeholder="Doe"
+          name="lastname"
+          class="regform-input name-input"
+        />
+      </div>
+    </div>
+    <div class="form-submit">
+      <button type="submit" (click)="registerUser()">Register</button>
+      <button (click)="fillForm()">Fill Form</button>
+    </div>
+  </form>
+</div>
+
+{{ registerForm.value | json }}

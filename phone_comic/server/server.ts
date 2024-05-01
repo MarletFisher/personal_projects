@@ -1,28 +1,96 @@
-import * as express from "express";
+import * as express from 'express';
 
-import { Request, Response } from "express";
-import { getChapterByNumber } from "./src/getChapterByNumber";
-import { getChapters } from "./src/getChapters";
+import { Request, Response } from 'express';
+import { Account } from 'src/app/types/Account';
+import { getChapterByNumber } from './src/getChapterByNumber';
+import { getChapters } from './src/getChapters';
 
 const app = express();
-const cors = require("cors");
+const sql = require('mssql');
+const bcrypt = require('bcrypt');
+const cors = require('cors');
 
 app.use(cors({ origin: true }));
 
 // Middleware
 app.use(express.json());
 
+// SQL connection config
+const config = {
+  user: 'sa',
+  password: 'Patricks321*',
+  server: 'localhost',
+  port: 1433,
+  database: 'PhoneComicDatabase',
+  authentication: {
+    type: 'default',
+  },
+  options: {
+    encrypt: true,
+  },
+  trustServerCertificate: true,
+};
+
 // get test
-app.route("/").get((req: Request, res: Response) => {
-	return res.send("Chapter API is working");
+app.route('/').get((req: Request, res: Response) => {
+  return res.send('Chapter API is working');
 });
 
-app.route("/api/chapters").get(getChapters);
+app.route('/api/chapters').get(getChapters);
 
-app.get("/api/chapter/:chapterNum", getChapterByNumber);
+app.get('/api/chapter/:chapterNum', getChapterByNumber);
+
+app.post('/api/registerUser', async (req, res) => {
+  const d = new Date();
+  try {
+    let user: Account = {
+      username: req.body.username,
+      password: '',
+      salt: '',
+      member: false,
+      registerDate: `${d.getFullYear()}-${d.getMonth()}-${d.getDay()}`,
+      firstName: req.body.firstname,
+      lastName: req.body.lastname,
+      lastChapterRead: 0,
+      lastPageRead: 0,
+      email: req.body.email,
+    };
+
+    bcrypt
+      .genSalt(10)
+      .then((salt: string) => {
+        console.log('Salt: ', salt);
+        user.salt = salt;
+        return bcrypt.hash(req.body.password, salt);
+      })
+      .then((hash: string) => {
+        console.log('Hash: ', hash);
+        user.password = hash;
+      })
+      .catch((err: any) => console.log(err.message));
+
+    // const hashedPassword = await bcrypt.hash(req.body.password, 10);
+
+    // SQL logic
+    var conn = await sql.connect(config);
+    const result = await conn
+      .request()
+      .query(
+        `INSERT INTO TestAppSchema.UserAccount VALUES ('${user.username}', '${user.password}', '${user.salt}', 0, '${user.registerDate}', '${user.firstName}', '${user.lastName}', 0, 0, '${user.email}')`
+      );
+    console.log(result);
+
+    res.send('User registered.');
+    res.status(201).send();
+  } catch (err: any) {
+    console.error(err.message);
+    res.send('Error: User was not registered.');
+    res.status(500).send();
+  }
+});
 
 app.listen(3000, () => {
-	console.log("Application listening at http://localhost:3000");
+  console.log('Application listening at http://localhost:3000');
 });
 
 /*

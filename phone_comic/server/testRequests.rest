@@ -1,0 +1,12 @@
+POST http://localhost:3000/api/registerUser
+Content-Type: application/json
+
+{
+  "username": "DucknCover",
+  "password": "passyword",
+  "firstname": "Vince",
+  "lastname": "Sanyoto",
+  "email": "vincesan@hotmail.ca"
+}
+
+###

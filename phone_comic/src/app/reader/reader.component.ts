@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { fromEvent, throttleTime } from 'rxjs';
-import { Chapter } from 'src/app/chapter';
-import { ChapterService } from '../chapter.service';
+import { Chapter } from 'src/app/types/Chapter';
+import { ChapterService } from '../services/chapter.service';
 
 // import { chaptersList } from 'src/assets/chapters';
 
@@ -28,7 +28,7 @@ export class ReaderComponent implements OnInit {
     const chapterNum = Number(
       this.route.snapshot.paramMap.get('chapterNumber')
     );
-    this.chapterService.getChapterById(chapterNum);
+    this.chapterService.getChapterObsById(chapterNum);
     this.initObservable(chapterNum);
   }
 

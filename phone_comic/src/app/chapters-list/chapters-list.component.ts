@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 // import { CHAPTERS } from 'src/app/mock-chapters';
-import { Chapter } from '../chapter';
-import { ChapterService } from '../chapter.service';
-import { ChapterResponse } from '../chapterresponse';
+import { ChapterService } from '../services/chapter.service';
+import { Chapter } from '../types/Chapter';
+import { ChapterResponse } from '../types/chapterresponse';
 
 @Component({
   selector: 'app-chapters-list',

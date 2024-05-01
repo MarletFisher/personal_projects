@@ -1,6 +1,6 @@
 h4 {
   font-size: 1.5em;
-  padding-left: 1em;
+  font-style: italic;
   text-transform: uppercase;
 }
 table {
@@ -9,6 +9,7 @@ table {
   th {
     background-color: #f5f5f5;
     padding: 1em;
+    text-align: center;
   }
   thead {
     th {
@@ -24,10 +25,14 @@ table {
     td {
       padding: 0.5em 1em;
     }
+
+    .chapterTitle {
+      color: #4a9eed;
+      text-decoration: underline;
+    }
   }
   .chapterNum {
     width: 5em;
-    text-align: center;
   }
 
   .chapterTitle {
