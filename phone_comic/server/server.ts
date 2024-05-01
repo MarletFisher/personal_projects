@@ -56,20 +56,31 @@ app.post('/api/registerUser', async (req, res) => {
       email: req.body.email,
     };
 
-    bcrypt
-      .genSalt(10)
-      .then((salt: string) => {
-        console.log('Salt: ', salt);
-        user.salt = salt;
-        return bcrypt.hash(req.body.password, salt);
-      })
-      .then((hash: string) => {
-        console.log('Hash: ', hash);
-        user.password = hash;
-      })
-      .catch((err: any) => console.log(err.message));
+    // bcrypt
+    //   .genSalt(10)
+    //   .then((salt: string) => {
+    //     console.log('Salt: ', salt);
+    //     user.salt = salt;
+    //     return bcrypt.hash(req.body.password, salt);
+    //   })
+    //   .then((hash: string) => {
+    //     console.log('Hash: ', hash);
+    //     user.password = hash;
+    //   })
+    //   .catch((err: any) => console.log(err.message));
 
-    // const hashedPassword = await bcrypt.hash(req.body.password, 10);
+    const salt = await bcrypt.genSalt();
+    const hashedPassword = await bcrypt.hash(req.body.password, 10);
+
+    console.log('salt:', salt);
+    console.log('hashedPassword:', hashedPassword);
+
+    user.salt = salt;
+    user.password = hashedPassword;
+
+    console.log('Registering user:', user.username);
+    console.log('PasswordHash:', user.password);
+    console.log('PasswordSalt:', user.salt);
 
     // SQL logic
     var conn = await sql.connect(config);
@@ -80,12 +91,62 @@ app.post('/api/registerUser', async (req, res) => {
       );
     console.log(result);
 
-    res.send('User registered.');
+    res.send({ registrationStatus: 'User registered.' });
     res.status(201).send();
   } catch (err: any) {
     console.error(err.message);
-    res.send('Error: User was not registered.');
+    res.send({ error: 'Error: User was not registered.' });
     res.status(500).send();
+  }
+});
+
+app.post('/api/userLogin', async (req, res) => {
+  var conn = await sql.connect(config);
+  var user: any;
+
+  var resultSet = await conn
+    .request()
+    .query(
+      `SELECT * FROM TestAppSchema.UserAccount WHERE Username = '${req.body.username}'`
+    );
+
+  console.log(resultSet.recordset.length, ' rows returned');
+
+  if (resultSet.recordset[0]) {
+    console.log('Found user', resultSet.recordset[0].UserName);
+    user = resultSet.recordset[0];
+  } else {
+    console.log('User not found');
+    res
+      .status(400)
+      .send({ loginStatus: 'No user with username: ' + req.body.username });
+  }
+  try {
+    console.log(
+      'Comparing',
+      req.body.username,
+      'with password:',
+      req.body.password
+    );
+    console.log('with', user.UserName, 'and', user.PasswordHash);
+    if (await bcrypt.compare(req.body.password, user.PasswordHash.trim())) {
+      res.send({
+        username: user.UserName,
+        member: user.Member,
+        registerDate: user.RegisterDate,
+        firstName: user.FirstName,
+        lastName: user.LastName,
+        lastChapterRead: user.LastChapterRead,
+        lastPageRead: user.LastPageRead,
+        email: user.email,
+      });
+      res.status(201).send();
+    } else {
+      res.send({ loginStatus: 'Unable to login' });
+      res.status(201).send();
+    }
+  } catch {
+    res.status(500).send('not allowed');
   }
 });
 

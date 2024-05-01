@@ -10,6 +10,7 @@ import { RegisterForm } from '../types/RegisterForm';
 })
 export class RegisterComponent {
   showForm = false;
+  testUserIteration = 0;
 
   constructor(private fb: FormBuilder, private authService: AuthService) {}
 
@@ -22,11 +23,21 @@ export class RegisterComponent {
   });
 
   fillForm() {
-    this.registerForm.value.username = 'exampleman';
-    this.registerForm.value.password = 'passyword';
-    this.registerForm.value.email = 'example@for.server';
-    this.registerForm.value.firstname = 'ex';
-    this.registerForm.value.lastname = 'ample';
+    const ctrls = this.registerForm.controls;
+    ctrls['username'].setValue('exampleman' + this.testUserIteration);
+    ctrls['password'].setValue('passyword');
+    ctrls['email'].setValue('example' + this.testUserIteration + '@gmail.com');
+    ctrls['firstname'].setValue('example' + this.testUserIteration);
+    ctrls['lastname'].setValue('man');
+
+    // this.registerForm.value.username = 'exampleman' + this.testUserIteration;
+    // this.registerForm.value.password = 'passyword';
+    // this.registerForm.value.email =
+    //   'example' + this.testUserIteration + '@gmail.com';
+    // this.registerForm.value.firstname = 'ex';
+    // this.registerForm.value.lastname = 'ample';
+
+    this.testUserIteration++;
   }
 
   registerUser() {
@@ -40,8 +51,14 @@ export class RegisterComponent {
       lastname: this.registerForm.value.lastname,
     };
     console.log(formData);
-    const response = this.authService.register(formData).subscribe((res) => {
-      console.log(res);
-    });
+    const response = this.authService
+      .register(formData)
+      .subscribe((response) => {
+        console.log('Response:', response);
+      });
+    console.log(response);
+    // this.authService.register(formData).subscribe((res) => {
+    //   console.log(res);
+    // });
   }
 }

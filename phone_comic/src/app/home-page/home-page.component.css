@@ -1,0 +1,10 @@
+/* Test Buttons */
+
+button {
+  background-color: #535558;
+  width: 8em;
+  border: 0px;
+  height: 2em;
+  border-radius: 5px;
+  margin: 2em;
+}

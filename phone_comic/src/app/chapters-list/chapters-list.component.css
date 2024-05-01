@@ -7,20 +7,20 @@ table {
   width: 100%;
   tr,
   th {
-    background-color: #f5f5f5;
+    background-color: #313235;
     padding: 1em;
     text-align: center;
   }
   thead {
     th {
-      border-bottom: 1em solid white;
+      border-bottom: 1em solid #252629;
     }
   }
 
   tbody {
     & :hover {
       cursor: pointer;
-      background-color: #e6e6e6;
+      background-color: #2c2d30;
     }
     td {
       padding: 0.5em 1em;

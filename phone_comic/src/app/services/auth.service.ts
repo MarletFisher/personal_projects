@@ -25,9 +25,12 @@ export class AuthService {
       }),
     };
 
-    return this.http
-      .post('http://localhost:3000/api/registerUser', registration, httpOptions)
-      .pipe(tap((response: any) => console.log('the response was', response)));
+    console.log('returning from authservice');
+    return this.http.post(
+      'http://localhost:3000/api/registerUser',
+      registration,
+      httpOptions
+    );
   }
 
   login(user: { username: string; password: string }): Observable<any> {

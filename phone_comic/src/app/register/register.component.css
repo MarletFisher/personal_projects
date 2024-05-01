@@ -67,6 +67,7 @@ h4 {
         border-radius: 5px;
         background-color: #46474a;
         width: 8em;
+        margin: 1em;
       }
       & :hover {
         background-color: #38393c;
