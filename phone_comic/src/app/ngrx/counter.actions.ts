@@ -6,8 +6,8 @@ export const decrement = createAction('[Counter Component] Decrement');
 export const reset = createAction('[Counter Component] Reset');
 
 export const login = createAction(
-  '[Account] Login',
+  '[Login] Login',
   props<{ account: AccountSession }>()
 );
 
-export const logout = createAction('[Account] Logout');
+export const logout = createAction('[Login] Logout');

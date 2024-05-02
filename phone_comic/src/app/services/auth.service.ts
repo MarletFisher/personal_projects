@@ -1,6 +1,8 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
+import { Store } from '@ngrx/store';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
+import { LoginRequest } from '../types/LoginRequest';
 import { RegisterForm } from '../types/RegisterForm';
 
 @Injectable({
@@ -13,7 +15,7 @@ export class AuthService {
 
   private http = inject(HttpClient);
 
-  constructor() {}
+  constructor(private store: Store) {}
 
   register(registration: RegisterForm): Observable<any> {
     console.log('register authservice called');
@@ -32,6 +34,23 @@ export class AuthService {
       httpOptions
     );
   }
+
+  loginUser(loginReq: LoginRequest) {
+    console.log('loginUser authservice called');
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+      }),
+    };
+    console.log('making post request');
+    return this.http.post(
+      'http://localhost:3000/api/userLogin',
+      loginReq,
+      httpOptions
+    );
+  }
+
+  // TUTORIAL
 
   login(user: { username: string; password: string }): Observable<any> {
     return this.http

@@ -48,7 +48,7 @@ app.post('/api/registerUser', async (req, res) => {
       password: '',
       salt: '',
       member: false,
-      registerDate: `${d.getFullYear()}-${d.getMonth()}-${d.getDay()}`,
+      registerDate: `${d.getFullYear()}-${d.getMonth()}-${d.getDate()}`,
       firstName: req.body.firstname,
       lastName: req.body.lastname,
       lastChapterRead: 0,
@@ -116,10 +116,12 @@ app.post('/api/userLogin', async (req, res) => {
     console.log('Found user', resultSet.recordset[0].UserName);
     user = resultSet.recordset[0];
   } else {
-    console.log('User not found');
-    res
-      .status(400)
-      .send({ loginStatus: 'No user with username: ' + req.body.username });
+    console.log('User not found, now exiting...');
+    res.send({
+      loginStatus: 'No user with username: ' + req.body.username,
+    });
+    res.status(400);
+    return;
   }
   try {
     console.log(

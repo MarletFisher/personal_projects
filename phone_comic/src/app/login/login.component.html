@@ -1,1 +1,32 @@
-<p>login works!</p>
+<h4>Login</h4>
+<div class="form-container">
+  <form id="loginForm" [formGroup]="loginForm">
+    <div class="form-page">
+      <div class="form-section">
+        <label for="username">Username: </label>
+        <input
+          formControlName="username"
+          name="username"
+          type="text"
+          class="loginform-input"
+        />
+      </div>
+      <div class="form-section">
+        <label for="password">Password: </label>
+        <input
+          formControlName="password"
+          name="password"
+          type="password"
+          class="loginform-input"
+        />
+      </div>
+    </div>
+    <div class="form-submit">
+      <button id="loginBtn" (click)="loginUser()">Login</button>
+      <button (click)="fillCorrect()">Fill - Correct</button>
+      <button (click)="fillFalse()">Fill - False</button>
+    </div>
+  </form>
+</div>
+
+{{ loginForm.value | json }}

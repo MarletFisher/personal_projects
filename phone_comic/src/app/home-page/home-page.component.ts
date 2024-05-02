@@ -15,14 +15,14 @@ export class HomePageComponent {
   count$?: Observable<number>;
 
   constructor() {
-    this.authService
-      .login({
-        username: 'kminchelle',
-        password: '0lelplR',
-      })
-      .subscribe((r) => {
-        console.log(r);
-      });
+    // this.authService
+    //   .login({
+    //     username: 'kminchelle',
+    //     password: '0lelplR',
+    //   })
+    //   .subscribe((r) => {
+    //     console.log(r);
+    //   });
     this.count$ = this.store.select('counter');
   }
 
