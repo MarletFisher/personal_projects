@@ -18,7 +18,7 @@ app.use(express.json());
 // SQL connection config
 const config = {
   user: 'sa',
-  password: 'Patricks321*',
+  password: 'sa123',
   server: 'localhost',
   port: 1433,
   database: 'PhoneComicDatabase',

@@ -1,6 +1,8 @@
 import { isDevMode } from '@angular/core';
 import { ActionReducerMap, MetaReducer } from '@ngrx/store';
 import { counterReducer } from './counter.reducer';
+import { loginReducer } from './account.reducer';
+import { AppState } from '../appState';
 
 // import { isDevMode } from '@angular/core';
 // import {
@@ -12,10 +14,11 @@ import { counterReducer } from './counter.reducer';
 // } from '@ngrx/store';
 // import { counterReducer } from './counter.reducer';
 
-export interface State {}
+// export interface State {}
 
-export const reducers: ActionReducerMap<State> = {
+export const reducers: ActionReducerMap<AppState> = {
   counter: counterReducer,
+  userSession: loginReducer,
 };
 
-export const metaReducers: MetaReducer<State>[] = isDevMode() ? [] : [];
+export const metaReducers: MetaReducer<AppState>[] = isDevMode() ? [] : [];

@@ -1,6 +1,6 @@
 import { createReducer, on } from '@ngrx/store';
 import { LoginSession } from 'src/app/types/LoginSession';
-import { login, logout } from '../counter.actions';
+import { loginAction, logout } from '../counter.actions';
 
 export const initialState: LoginSession = {
   account: null,
@@ -9,6 +9,10 @@ export const initialState: LoginSession = {
 
 export const loginReducer = createReducer(
   initialState,
-  on(login, (state, { account }) => ({ ...state, account, loginStatus: true })),
+  on(loginAction, (state, { account }) => ({
+    ...state,
+    account: account,
+    loginStatus: true,
+  })),
   on(logout, (state) => ({ ...state, account: null, loginStatus: false }))
 );

@@ -25,6 +25,7 @@ import { authInterceptor } from './interceptors/auth.interceptor';
 import { LoginComponent } from './login/login.component';
 import { metaReducers, reducers } from './ngrx/reducers';
 import { RegisterComponent } from './register/register.component';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 const appRoutes: Routes = [
   { path: 'home-page', component: HomePageComponent },
@@ -56,6 +57,9 @@ const appRoutes: Routes = [
     ReactiveFormsModule,
     StoreModule.forRoot(reducers, {
       metaReducers,
+    }),
+    StoreDevtoolsModule.instrument({
+      maxAge: 25, // Retains last 25 states
     }),
   ],
   providers: [provideHttpClient(withInterceptors([authInterceptor]))],
