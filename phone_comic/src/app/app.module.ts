@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, isDevMode } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule, Routes } from '@angular/router';
 
@@ -20,11 +20,13 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { StoreModule } from '@ngrx/store';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { TableRowHighlightDirective } from './directives/table-row-highlight.directive';
 import { authInterceptor } from './interceptors/auth.interceptor';
 import { LoginComponent } from './login/login.component';
 import { metaReducers, reducers } from './ngrx/reducers';
 import { RegisterComponent } from './register/register.component';
+import { ProfileComponent } from './profile/profile.component';
 
 const appRoutes: Routes = [
   { path: 'home-page', component: HomePageComponent },
@@ -44,10 +46,11 @@ const appRoutes: Routes = [
     TableRowHighlightDirective,
     RegisterComponent,
     LoginComponent,
+    ProfileComponent,
   ],
   imports: [
     BrowserModule,
-    RouterModule.forRoot(appRoutes, { enableTracing: true }),
+    RouterModule.forRoot(appRoutes, { enableTracing: false }),
     AppRoutingModule,
     // ChaptersRoutingModule,
     HttpClientModule,
@@ -57,6 +60,10 @@ const appRoutes: Routes = [
     StoreModule.forRoot(reducers, {
       metaReducers,
     }),
+    StoreDevtoolsModule.instrument({
+      maxAge: 25, // Retains last 25 states
+    }),
+    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),
   ],
   providers: [provideHttpClient(withInterceptors([authInterceptor]))],
   bootstrap: [AppComponent],

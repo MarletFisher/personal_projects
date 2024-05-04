@@ -35,8 +35,8 @@ export class HomePageComponent {
   }
   reset() {
     this.store.dispatch(reset());
-    this.authService.getCurrentAuthUser().subscribe((r) => {
-      console.log(r);
-    });
+    // this.authService.getCurrentAuthUser().subscribe((r) => {
+    //   console.log(r);
+    // });
   }
 }

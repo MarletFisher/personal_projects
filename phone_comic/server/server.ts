@@ -118,9 +118,9 @@ app.post('/api/userLogin', async (req, res) => {
   } else {
     console.log('User not found, now exiting...');
     res.send({
-      loginStatus: 'No user with username: ' + req.body.username,
+      error: 'No user with username: ' + req.body.username,
     });
-    res.status(400);
+    res.status(201);
     return;
   }
   try {
@@ -140,15 +140,15 @@ app.post('/api/userLogin', async (req, res) => {
         lastName: user.LastName,
         lastChapterRead: user.LastChapterRead,
         lastPageRead: user.LastPageRead,
-        email: user.email,
+        email: user.Email,
       });
       res.status(201).send();
     } else {
-      res.send({ loginStatus: 'Unable to login' });
+      res.send({ error: 'Unable to login' });
       res.status(201).send();
     }
   } catch {
-    res.status(500).send('not allowed');
+    res.status(500).send({ error: 'Unknown error' });
   }
 });
 

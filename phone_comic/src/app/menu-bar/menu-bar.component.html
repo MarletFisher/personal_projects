@@ -1,38 +1,59 @@
 <div class="menu-container">
-  <div class="menu-title">
-    <h3>Working Title</h3>
+  <div class="menu-row row-1">
+    <div *ngIf="accountSession" class="menu-profile">
+      <a>
+        <p>Welcome</p>
+        <p>{{ accountSession.username }}</p>
+      </a>
+    </div>
   </div>
-  <div class="menu-links">
-    <a
-      routerLink="/home-page"
-      routerLinkActive="active"
-      areaCurrentWhenActive="page"
-      class="menu-item"
-      >Home Page</a
-    >
+  <div class="menu-row row-2">
+    <div class="menu-title">
+      <h3>
+        <a
+          routerLink="/home-page"
+          routerLinkActive="active"
+          areaCurrentWhenActive="page"
+          >Working Title</a
+        >
+      </h3>
+    </div>
+    <div class="menu-links">
+      <a
+        (click)="logout()"
+        *ngIf="loginStatus === true"
+        routerLink="/home-page"
+        routerLinkActive="active"
+        areaCurrentWhenActive="page"
+        class="menu-item"
+        >Logout</a
+      >
 
-    <a
-      routerLink="/register"
-      routerLinkActive="active"
-      areaCurrentWhenActive="page"
-      class="menu-item"
-      >Register</a
-    >
+      <a
+        *ngIf="loginStatus === false"
+        routerLink="/register"
+        routerLinkActive="active"
+        areaCurrentWhenActive="page"
+        class="menu-item"
+        >Register</a
+      >
 
-    <a
-      routerLink="/login"
-      routerLinkActive="active"
-      areaCurrentWhenActive="page"
-      class="menu-item"
-      >Login</a
-    >
+      <a
+        *ngIf="loginStatus === false"
+        routerLink="/login"
+        routerLinkActive="active"
+        areaCurrentWhenActive="page"
+        class="menu-item"
+        >Login</a
+      >
 
-    <a
-      routerLink="/chapters-list"
-      routerLinkActive="active"
-      ariaCurrentWhenActive="page"
-      class="menu-item"
-      >Chapters</a
-    >
+      <a
+        routerLink="/chapters-list"
+        routerLinkActive="active"
+        ariaCurrentWhenActive="page"
+        class="menu-item"
+        >Chapters</a
+      >
+    </div>
   </div>
 </div>

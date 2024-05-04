@@ -1,14 +1,14 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { LoginSession } from '../types/LoginSession';
+// import { LoginSession } from '../types/LoginSession';
 
-const selectLoginState = createFeatureSelector<LoginSession>('appState');
+const selectLoginState = createFeatureSelector<any>('userSession');
 
 export const selectLoginStatus = createSelector(
   selectLoginState,
   (state) => state.loginStatus
 );
 
-export const selectAccount = createSelector(
+export const selectAccountSession = createSelector(
   selectLoginState,
   (state) => state.account
 );
