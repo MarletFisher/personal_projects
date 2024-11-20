@@ -1,0 +1,26 @@
+{
+  "name": "web422-assignment4",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@types/json5": "^2.2.0",
+    "bootstrap": "^5.3.3",
+    "jotai": "^2.10.2",
+    "next": "14.2.15",
+    "react": "^18",
+    "react-bootstrap": "^2.10.5",
+    "react-dom": "^18",
+    "react-hook-form": "^7.53.1",
+    "swr": "^2.2.5"
+  },
+  "devDependencies": {
+    "eslint": "^8",
+    "eslint-config-next": "14.2.15"
+  }
+}
